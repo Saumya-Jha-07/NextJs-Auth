@@ -29,7 +29,7 @@ function page() {
 
     console.log(res.data);
 
-    router.push("/login");
+    router.push("/verify");
   }
 
   return (

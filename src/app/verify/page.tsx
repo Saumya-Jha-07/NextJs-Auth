@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 export default function VerifyPage() {
@@ -9,23 +8,23 @@ export default function VerifyPage() {
 
   const router = useRouter();
 
-  useEffect(() => {
+  const verifyUser = async () => {
     if (!token) return;
 
-    const verifyUser = async () => {
-      const res = await fetch("/api/auth/verify", {
-        method: "POST",
-        body: JSON.stringify({ token }),
-      });
+    const res = await fetch("/api/auth/verify", {
+      method: "POST",
+      body: JSON.stringify({ token }),
+    });
 
-      router.push("/");
+    router.push("/login");
 
-      const data = await res.json();
-      console.log(data);
-    };
+    const data = await res.json();
+    console.log(data);
+  };
 
-    verifyUser();
-  }, [token]);
-
-  return <div>Verifying...</div>;
+  return (
+    <div>
+      <button onClick={verifyUser}>Verify Email</button>
+    </div>
+  );
 }
