@@ -3,11 +3,14 @@
 import Link from "next/link";
 import axios from "axios";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function page() {
   const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const router = useRouter();
 
   async function handleSubmit(e: any) {
     e.preventDefault();
@@ -18,11 +21,15 @@ function page() {
       password,
     });
 
+    // yaha checks lagane the + try-catch
+
     setEmail("");
     setPassword("");
     setUsername("");
 
     console.log(res.data);
+
+    router.push("/login");
   }
 
   return (

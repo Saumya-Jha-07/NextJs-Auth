@@ -3,10 +3,13 @@
 import Link from "next/link";
 import axios from "axios";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function page() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const router = useRouter();
 
   async function handleSubmit(e: any) {
     e.preventDefault();
@@ -20,6 +23,8 @@ function page() {
     setPassword("");
 
     console.log("Response : ", res);
+
+    router.push("/profile");
   }
 
   return (
