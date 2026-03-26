@@ -25,6 +25,9 @@ export async function POST(request: NextRequest) {
     $unset: {
       refreshToken: 1,
     },
+    $set: {
+      isVerified: false,
+    },
   });
 
   const res = NextResponse.json(
