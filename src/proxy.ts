@@ -1,11 +1,17 @@
-// import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-// export function proxy(request: NextRequest) {
-//   console.log("proxy pe req aayi , redirecting to /login");
+export function proxy(request: NextRequest) {
+  const cookie = request.cookies.get("accessToken");
 
-//   return NextResponse.redirect(new URL("/login", request.url));
-// }
+  const accessToken = cookie?.value;
 
-// export const config = {
-//   matcher: ["/signup "],
-// };
+  if (!accessToken) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/profile"],
+};
